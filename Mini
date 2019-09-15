@@ -1,0 +1,9 @@
+from github import Github
+g = Github("93249d5f955d1a01f9287b04d7f9c50b6e5f27a6")
+for repo in g.get_user().get_repos():
+    print(repo.name)
+    print("Stars: ", repo.stargazers_count)
+    pulls = repo.get_pulls(state='open', sort='created', base='master')
+    for pr in pulls:
+        print(pr.number)
+    print("\n")
