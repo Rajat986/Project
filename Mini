@@ -1,9 +1,17 @@
 from github import Github
-g = Github("62b0b3ada98c5854805a559288d3da16a38c6f1d")
+
+g = Github("a15653f075652a42ff76fc5b7498edc64d36f24b")
 for repo in g.get_user().get_repos():
-    print(repo.name)
+    rep=repo.name
+    print(rep)
     print("Stars: ", repo.stargazers_count)
     pulls = repo.get_pulls(state='open', sort='created', base='master')
     for pr in pulls:
         print("Pull Request: ",pr.number)
+    
+    branch = repo.get_branch("master")
+    z=branch.commit
+    print(z)
+
+//    commit = repo.get_commit(sha=z)
     print("\n")
