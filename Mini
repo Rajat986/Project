@@ -13,5 +13,5 @@ for repo in g.get_user().get_repos():
     z=branch.commit
     print(z)
 
-//    commit = repo.get_commit(sha=z)
+    commit = repo.get_commit(sha=z)
     print("\n")
