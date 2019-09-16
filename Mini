@@ -1,6 +1,6 @@
 from github import Github
 
-g = Github("a15653f075652a42ff76fc5b7498edc64d36f24b")
+g = Github("dd7241fff9f4f9195b0ccb21d6deb299b3e8958c")
 for repo in g.get_user().get_repos():
     rep=repo.name
     print(rep)
@@ -10,7 +10,7 @@ for repo in g.get_user().get_repos():
         print("Pull Request: ",pr.number)
     
     branch = repo.get_branch("master")
-    z=branch.commit
+    z=branch.commit.sha
     print(z)
 
     commit = repo.get_commit(sha=z)
