@@ -54,9 +54,9 @@ void greet()
 
 		case 2:{
 			cout<<"Queue:-\n";
-			int insert(int,int,int [],int);
-			int delet(int,int [],int);
-			void display(int,int []);
+			void insert(int,int,int [],int,int);
+			int delet(int,int [],int,int);
+			void display(int,int,int []);
 			int a[n],ch,front=-1,rear=-1;
 			while(1)
 			{
@@ -68,13 +68,13 @@ void greet()
 						cout<<"Enter element: ";
 						int ele;
 						cin>>ele;
-						top=insert(ele,n,a,top);
+						insert(ele,n,a,front,rear);
 						break;
 					case 2: cout<<"Delete operation:-"<<endl;
-						top=delet(n,a,top);
+						front=delet(n,a,front,rear);
 						break;
 					case 3: cout<<"\nQueue is:-\n";
-						display(top,a);
+						display(front,rear,a);
 						cout<<endl;
 						break;
 					case 4: cout<<"Bye...";
@@ -83,6 +83,7 @@ void greet()
 					default:cout<<"Invalid Input!";
 				}
 		        }
+		       }
 			break;
 
 		case 3: cout<<"\nGood Bye...\n";
@@ -93,31 +94,31 @@ void greet()
 	}
 }
 
-int insert(int ele, int n, int a[], int top)
+void insert(int ele, int n, int a[], int& front,int& rear)
 {
 	if(rear==n-1)
 	{
 		cout<<"Overflow!!!\n";
-		return top;
+		return;
 	}
 	if(front==-1)
 		front=0;
 	rear++;
 	a[rear]=ele;
-	return top;
+	return;
 }
-int delet(int n, int a[], int top)
+int delet(int n, int a[], int front, int rear)
 {
 	if(front==-1 || front>rear)
 	{
 		cout<<"Underflow!!!\n";
-		return top;
+		return front;
 	}
 	cout<<a[front]<<" is deleted from queue\n";
 	front++;
-	return top;
+	return front;
 }
-void display(int top, int a[])
+void display(int front, int rear, int a[])
 {
 	if(front==-1)
 	{
