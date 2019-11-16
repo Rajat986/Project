@@ -168,5 +168,5 @@ void display(int top, int a[])
 BOOST_PYTHON_MODULE(hello_ext)
 {
 	using namespace boost::python;
-	def("array_o", greet);
+	def("greet", greet);
 }
