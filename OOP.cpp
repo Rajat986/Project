@@ -1,9 +1,9 @@
-Compile:
+/*Compile:
 bjam --toolset=gcc --verbose-test test
 
 Run:
 python OOP.py
-
+*/
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
 #include <boost/array.hpp>
