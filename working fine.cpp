@@ -1,169 +1,121 @@
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
-#include<iostream>
+#include <iostream>
 using namespace std;
-
-void greet()
+#define SIZE 5
+class stack
 {
-
-	int n,choice;
-	cout<<"Hello!\n";
-	cout<<"Enter the number of elements: ";
-	cin>>n;
-	cout<<"The number of elemets are: "<< n;
-	while(1)
-	{
-	cout<<"\nChoose data structure:-\n1. Stack\n2. Queue\n3. Exit\nEnter your choice: ";
-	cin>>choice;
-	 switch(choice)
-	 {
-		case 1:{ 
-			cout<<"Stack:-\n";
-			int push(int,int,int [],int);
-			int pop(int,int [],int);
-			void display(int,int[]);
-			int a[n],ch,top=-1;
-			while(1)
-			{
-				cout<<"\nStack operation:-\n1. Push\n2. Pop\n3. Display\n4. Exit\n";
-				cout<<"Enter your choice: ";
-				cin>>ch;
-				switch(ch)
-   				{
-					case 1: cout<<"Push Operation:-"<<endl;
-						cout<<"\nEnter element: ";
-						int ele;
-						cin>>ele;
-						top=push(ele,n,a,top);
-						break;
-					case 2: cout<<"Pop Operation:-"<<endl;
-						top=pop(n,a,top);
-						break;
-					case 3: cout<<"\nStack is:-\n";
-						display(top,a);
-						cout<<endl;
-						break;
-					case 4: cout<<"\nBye...\n";
-						exit(1);
-						break;
-					default:cout<<"Invalid Input!!!"<<endl;
-  				}
-			 }
-			}
-			break;
-
-/*		case 2:{
-			cout<<"Queue:-\n";
-			void insert(int,int,int [],int,int);
-			int delet(int,int [],int,int);
-			void display(int,int,int []);
-			int a[n],ch,front=-1,rear=-1;
-			while(1)
-			{
-				cout<<"\nQueue Operation:-\n1. Insert\n2. Delete\n3. Display\n4. Exit\nEnter your choice: ";
-				cin>>ch;
-				switch(ch)
-				{
-					case 1: cout<<"Insert operation:-"<<endl;
-						cout<<"Enter element: ";
-						int ele;
-						cin>>ele;
-						insert(ele,n,a,front,rear);
-						break;
-					case 2: cout<<"Delete operation:-"<<endl;
-						front=delet(n,a,front,rear);
-						break;
-					case 3: cout<<"\nQueue is:-\n";
-						display(front,rear,a);
-						cout<<endl;
-						break;
-					case 4: cout<<"Bye...";
-						exit(1);
-						break;
-					default:cout<<"Invalid Input!";
-				}
-		        }
-		       }
-			break;*/
-
-		case 3: cout<<"\nGood Bye...\n";
-			exit(1);
-			break;
-		default:cout<<"Invalid Input!\n";
-	 }
-	}
+	private:
+		int top;
+		int num[SIZE];
+	public:
+		stack();
+		int push(int);
+		int pop();
+		int isEmpty();
+		int isFull();
+		void displayItems();
+};
+stack::stack()
+{
+    top=-1;
 }
-
-void insert(int ele, int n, int a[], int& front,int& rear)
+int stack ::isEmpty()
 {
-	if(rear==n-1)
+	if(top==-1)
+		return 1;
+	else
+		return 0;
+}
+int stack::isFull()
+{
+	if(top==(SIZE-1))
+		return 1;
+	else
+		return 0;
+}
+int stack::push(int n)
+{
+	if(isFull())
+		return 0;
+	++top;
+	num[top]=n;
+	return n;
+}
+int stack::pop()
+{
+	int temp;
+	if(isEmpty())
+		return 0;
+	temp=num[top];
+	--top;
+	return temp;
+}
+void stack::displayItems()
+{
+	int i;
+	if(top==-1)
 	{
-		cout<<"Overflow!!!\n";
+		cout<<"Stack is Empty!!!\n";
 		return;
 	}
-	if(front==-1)
-		front=0;
-	rear++;
-	a[rear]=ele;
-	return;
-}
-int delet(int n, int a[], int front, int rear)
-{
-	if(front==-1 || front>rear)
-	{
-		cout<<"Underflow!!!\n";
-		return front;
-	}
-	cout<<a[front]<<" is deleted from queue\n";
-	front++;
-	return front;
-}
-void display(int front, int rear, int a[])
-{
-	if(front==-1)
-	{
-		cout<<"Empty!!!\n";
-		return;
-	}
-	for(int i=front;i<=rear;i++)
-		cout<<a[i]<<" ";
+	cout<<"STACK is:\n";
+	for(i=top; i>=0; i--)
+		cout<<num[i]<<endl;
 	cout<<endl;
 }
 
-int push(int ele, int n, int a[], int top)
+void greet()
 {
-	if(top>=n-1)
+ int ch;
+ do
+ {
+	cout<<"1. Stack\n2. Queue\n3. Exit\nEnter your choice: ";
+	cin>>ch;
+	switch(ch)
 	{
-		cout<<"Overflow!!!\n";
-		cout<<top<<endl;
-		return top;
+		case 1:{
+			stack stk;
+			int choice, n,temp;
+			do
+			{
+				cout<<endl;
+				cout<<"1. Push Item\n2. Pop Item\n3. Display Stack\n4. Exit\n"<<endl;
+				cout<<"Enter your choice: ";
+				cin>>choice;
+				switch(choice)
+				{
+					case 1: cout<<"Enter item to insert: ";
+						cin>>n;
+						temp=stk.push(n);
+						if(temp==0)
+							cout<<"STACK is FULL."<<endl;
+						else
+							cout<<temp<<"is inserted into Stack."<<endl;
+						break;
+					case 2: temp=stk.pop();
+						if(temp==0)
+							cout<<"STACK IS EMPTY."<<endl;
+						else
+							cout<<temp<<" is removed from Stack."<<endl;
+						break;
+					case 3: stk.displayItems();
+						break;
+					case 4: cout<<"Bye...\n";
+						break;
+					default:cout<<"An Invalid choice."<<endl;
+				}
+			}while(choice!=4);
+		       }
+		       break;
+		case 2: break;
+		case 3: cout<<"Good Bye...\n";
+			break;
+		default:cout<<"Invalid Input!!!\n";
 	}
-	++top;
-	a[top]=ele;
-	cout<<ele<<" pushed into stack!\n";
-	return top;
+ }while(ch!=3);
 }
-int pop(int n, int a[], int top)
-{
-	if(top==-1)
-	{
-		cout<<"Underflow!!!\n";
-		return top;
-	}
-	cout<<"Popped element is: "<<a[top]<<endl;
-	--top;
-	return top;
-}
-void display(int top, int a[])
-{
-	if(top==-1)
-	{
-		cout<<"Empty!!!\n";
-		return;
-	}
-	for(int i=0;i<=top;i++)
-		cout<<a[i]<<" ";
-}
+
 
 BOOST_PYTHON_MODULE(hello_ext)
 {
