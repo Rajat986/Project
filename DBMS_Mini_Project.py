@@ -104,7 +104,7 @@ with open("D:DBMS\\customer_detail.csv","w") as out_file:
 
         if page_number>2:
             break
-        print("here")
+        print("Here are the details:")
         url="https://www.justdial.com/Bangalore/Estate-Agents-in-Sarakki-Nagar/nct-10192623/page-%s"%(page_number)
         text = get_article(url)
         #print(text)
